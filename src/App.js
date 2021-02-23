@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { ThemeProvider } from "styled-components";
 
+import Home from "./components/Home";
+import About from "./components/About";
+import { Route, Switch } from "react-router";
+import { Link } from "react-router-dom";
+import { GlobalStyle, AppWrapper } from "./styles";
+
+const theme = {
+  mainColor: "#414066",
+  backgroundColor: "#D8AA96",
+  secondaryColor: "#E55381",
+};
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppWrapper>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+
+        <Link to="/">Home</Link>
+        <br></br>
+        <Link to="/about"> About</Link>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+        </Switch>
+      </ThemeProvider>
+    </AppWrapper>
   );
 }
 
